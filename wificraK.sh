@@ -45,7 +45,7 @@ function dependencies(){
             echo -e " ${greenColour}(Installed)${endColour}"
         else
 
-            echo -e "\n[*] Instalando herramienta $program\n"
+            echo -e "\n[*] Installing $program\n"
             apt-get install $program -y > /dev/null 2>&1
 
 
