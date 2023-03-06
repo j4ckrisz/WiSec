@@ -1,24 +1,70 @@
-# wificraK
+<p align="center">
+  <h1 align="center">WificraK</h1>
+</p>
 
-A tool created for the automation of (WPA/WPA2 - PSK) attacks. This tool is designed to obtain passwords.
+## Introduction
 
-This tool has been tested in:
+WificraK is tool that allows yo to do most of the **WPA2-PSK** and **WEP** encryption attacks. The tool let's you crack previous files that you have captured using crunch or a wordlist.
 
-    - Kali Linux
-    - Parrot OS
+The tool has been tested in **Kali Linux**, **Parrot OS**.
 
-It will probably also work on Ubuntu and other linux distros without problems.
+- All of these attacks works great with the **Alfa AWUS036NHA** antena.
 
-The first attack mode is the most classic wifi attack, consists of capturing the password using **de-auth** packets and then cracking the password using aircrack-ng. The **PMKID** attack, takes advantage of routers that have roaming feature enabled or present are vulnerable, so we dont need clients connected to the **Access Point**.
+## Attacks
 
-## How to use it?
+- Deauthentication Attack
 
-Just execute the tool like this:
+- Authentication Attack
 
-```bash
+- Beacon Flood Attack
 
-┌─[root@parrot]─[~/Desktop]
-└──╼ $ ./wificracK.sh
+- PMKID Attack
+
+- Passive Attack
+
+- Pixie Dust Attack
+
+- Null Pin Attack
+
+- WEP Protocol Attacks
+
+- Offline Cracking Options 
 
 
-``` 
+## Usage
+
+> **To start wificraK**, you need to be **root** and then start it with this command.
+
+```sh
+./wificraK -n wlan0 # Change the interface name if it's different
+```
+## Requirements
+
+> You don't need to install all the requirements manually, this will be check once you start the program.
+
+    aircrack-ng
+    reaver
+    mdk4
+    macchanger
+    xterm
+    hcxtools
+    wash
+
+## Demo
+
+> Demo on a **Kali Linux**
+
+
+![](wificraK_image.png)
+
+
+
+## Disclaimer
+
+Creator isn't in charge of any and has no responsibility for any kind of:
+
+- Unlawful or illegal use of the project.
+- Legal or Law infringement (acted in any country, state, municipality, place) by third parties and users.
+- Act against ethical and / or human moral, ethic, and peoples of the world.
+- Malicious act, capable of causing damage to third parties, promoted or distributed by third parties or the user through this software.
+
