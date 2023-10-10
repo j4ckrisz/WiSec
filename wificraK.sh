@@ -1106,14 +1106,14 @@ function dependencies(){
             apt-get install $program -y > /dev/null 2>&1
 
 
-        fi;sleep 1
+        fi; sleep 1
 
     done
     clear
 
-    fluxion_check=$(find /opt/fluxion -name fluxion.sh 2>/dev/null | echo $!)
+    fluxion_check=$(find /opt/fluxion -name fluxion.sh 2>/dev/null | echo $?)
 
-    if [ fluxion_check -nq 0 ];then
+    if [ "${fluxion_check}" == "0" ];then
 
         echo -ne "${grayColour}\n[*] Installing Fluxion ... ${endColour}"
 
