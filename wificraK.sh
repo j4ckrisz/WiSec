@@ -1005,10 +1005,8 @@ function constant_deauth_attack(){
 
     clear
 
-
-
-
 }
+
 
 function evil_twin_options(){
 
@@ -1020,7 +1018,9 @@ function evil_twin_options(){
 
         echo -ne "\n${blueColour}[1]${endColour}${grayColour} Fluxion${endColour}\n"
         echo -ne "${blueColour}[2]${endColour}${grayColour} Wifiphisher${endColour}\n"
-        echo -ne "${blueColour}[3]${endColour}${grayColour} Back${endColour}\n"
+        echo -ne "${blueColour}[3]${endColour}${grayColour} Wifipumpkin3${endColour}\n"
+        echo -ne "${blueColour}[4]${endColour}${grayColour} Back${endColour}\n"
+
 		echo -ne "\n${yellowColour}[>]${endColour}${grayColour} Choose an option > ${endColour}" && read opc
 
         case $opc in
@@ -1044,6 +1044,13 @@ function evil_twin_options(){
                 ;;
 
             3)
+
+
+		xterm -hold -e "sudo wifipumpkin3" &
+                ;;
+
+
+            4)
 
                 menu
                 ;;
@@ -1087,7 +1094,7 @@ function qhelppanel(){
 function dependencies(){
 
     ## checking dependencies
-    dependencies=(aircrack-ng macchanger xterm hcxdumptool crunch wash reaver mdk3 mdk4 wifiphisher git php-cgi dhcpd lighttpd bc)
+    dependencies=(wifipumpkin3 aircrack-ng macchanger xterm hcxdumptool crunch wash reaver mdk3 mdk4 wifiphisher git php-cgi dhcpd lighttpd bc)
 
     echo -ne "${purpleColour}[*] ${endColour}${blueColour}Checking dependencies${endColour}\n"
 
@@ -1149,14 +1156,14 @@ if [ $(id -u) -eq "0" ];then
 
     if [ $parameter_counter -ne 1 ];then
 
-		
+
         qhelppanel
 
     else
-		monitor_mode_verification
+
+	monitor_mode_verification
         dependencies
         menu
-
 
     fi
 
