@@ -28,7 +28,9 @@ The tool has been tested in **Kali Linux**, **Parrot OS**.
 
 - WEP Protocol Attacks
 
-- Offline Cracking Options 
+- Offline Cracking Options
+
+- Evil Twin Attacks
 
 
 ## Usage
