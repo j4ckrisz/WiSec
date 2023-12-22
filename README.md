@@ -1,10 +1,10 @@
 <p align="center">
-  <h1 align="center">WificraK</h1>
+  <h1 align="center">WiSec</h1>
 </p>
 
 ## Introduction
 
-WificraK is tool that allows yo to do most of the **WPA2-PSK** and **WEP** encryption attacks. The tool let's you crack previous files that you have captured using crunch or a wordlist.
+WiSec is tool that allows yo to do most of the **WPA2-PSK** and **WEP** encryption attacks. The tool let's you crack previous files that you have captured using crunch or a wordlist.
 
 The tool has been tested in **Kali Linux**, **Parrot OS**.
 
@@ -35,10 +35,10 @@ The tool has been tested in **Kali Linux**, **Parrot OS**.
 
 ## Usage
 
-> **To start wificraK**, you need to be **root** and then start it with this command.
+> **To start WiSec**, you need to be **root** and then start it with this command.
 
 ```sh
-./wificraK -n wlan0 # Change the interface name if it's different
+./WiSec -n wlan0 # Change the interface name if it's different
 ```
 ## Requirements
 
