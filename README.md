@@ -57,7 +57,7 @@ The tool has been tested in **Kali Linux**, **Parrot OS**.
 > Demo on a **Kali Linux**
 
 
-![](wificraK_image.png)
+![](WiSec.png)
 
 
 
