@@ -1231,19 +1231,12 @@ function evil_twin_options(){
 
 function qhelppanel(){
 
-	echo -ne "${redColour} █     █░ ██▓  █████▒██▓ ▄████▄   ██▀███   ▄▄▄       ██ ▄█▀${endColour}\n"
-	echo -ne "${redColour}▓█░ █ ░█░▓██▒▓██   ▒▓██▒▒██▀ ▀█  ▓██ ▒ ██▒▒████▄     ██▄█▒ ${endColour}\n"
-	echo -ne "${redColour}▒█░ █ ░█ ▒██▒▒████ ░▒██▒▒▓█    ▄ ▓██ ░▄█ ▒▒██  ▀█▄  ▓███▄░ ${endColour}\n"
-	echo -ne "${redColour}░█░ █ ░█ ░██░░▓█▒  ░░██░▒▓▓▄ ▄██▒▒██▀▀█▄  ░██▄▄▄▄██ ▓██ █▄ ${endColour}\n"
-	sleep 0.5
-	echo -ne "${redColour}░░██▒██▓ ░██░░▒█░   ░██░▒ ▓███▀ ░░██▓ ▒██▒ ▓█   ▓██▒▒██▒ █▄${endColour}\n"
-	echo -ne "${redColour}░ ▓░▒ ▒  ░▓   ▒ ░   ░▓  ░ ░▒ ▒  ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░▒ ▒▒ ▓▒${endColour}\n"
-	echo -ne "${redColour}  ▒ ░ ░   ▒ ░ ░      ▒ ░  ░  ▒     ░▒ ░ ▒░  ▒   ▒▒ ░░ ░▒ ▒░${endColour}\n"
-	sleep 0.5
-
-	echo -ne "${redColour}  ░   ░   ▒ ░ ░ ░    ▒ ░░          ░░   ░   ░   ▒   ░ ░░ ░ ${endColour}\n"
-	echo -ne "${redColour}    ░     ░          ░  ░ ░         ░           ░  ░░  ░   ${endColour}\n"
-	echo -ne "${redColour}                        ░                                 ${endColour}\n"
+    echo -ne "${redColour}██╗    ██╗██╗███████╗███████╗ ██████╗${endColour}\n"
+    echo -ne "${redColour}██║    ██║██║██╔════╝██╔════╝██╔════╝${endColour}\n"
+    echo -ne "${redColour}██║ █╗ ██║██║███████╗█████╗  ██║     ${endColour}\n"
+    echo -ne "${redColour}██║███╗██║██║╚════██║██╔══╝  ██║     ${endColour}\n"
+    echo -ne "${redColour}╚███╔███╔╝██║███████║███████╗╚██████╗${endColour}\n"
+    echo -ne "${redColour} ╚══╝╚══╝ ╚═╝╚══════╝╚══════╝ ╚═════╝${endColour}\n"
 
 
 	echo -ne "${yellowColour}[${endColour}${blueColour}wisec${endColour}${yellowColour}]${endColour} ${blueColour}WI-FI Explotation Tool${endColour}\n"
