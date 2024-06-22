@@ -4,6 +4,8 @@
 
 ## Introduction
 
+## (Currently developing a python version using tkinter)
+
 WiSec is tool that allows yo to do most of the **WPA2-PSK** and **WEP** encryption attacks. The tool let's you crack previous files that you have captured using crunch or a wordlist.
 
 The tool has been tested in **Kali Linux**, **Parrot OS**.
