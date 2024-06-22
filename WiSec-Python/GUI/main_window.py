@@ -4,8 +4,8 @@ from scapy.all import sniff, Dot11, Dot11Elt, Dot11Beacon, Dot11ProbeResp
 import subprocess
 from logic.network_utils import get_network_interfaces
 
-# Import WPA2_Window from the correct module path
 from GUI.WPA2_Window import WPA2_Window
+from GUI.WPS_Window import WPS_Window 
 
 class Main_Window(tk.Frame):
 
@@ -14,7 +14,7 @@ class Main_Window(tk.Frame):
         self.master = master
         self.pack()
         self.master.title("Wisec - Wireless Penetration Testing Tool")
-        self.master.geometry("1440x720")
+        self.master.geometry("750x720")
 
         self.create_network_interface_selector()
         self.create_attack_menu()
@@ -53,6 +53,9 @@ class Main_Window(tk.Frame):
         self.evil_twin_button = tk.Button(self.menu_frame, text="Evil Twin Options", command=self.on_evil_twin)
         self.evil_twin_button.grid(row=3, column=0, pady=5, sticky='ew')
 
+        self.magic_cage = tk.Button(self.menu_frame, text="Magic Cage", command=self.magic_cage)
+        self.magic_cage.grid(row=3, column=0, pady=5, sticky='ew')
+
     def open_wpa2_window(self):
         WPA2_Window(self)
 
@@ -60,8 +63,7 @@ class Main_Window(tk.Frame):
         pass
 
     def open_wps_window(self):
-
-        pass
+        WPS_Window(self)
 
     def on_evil_twin(self):
         print("Evil Twin Attack selected")
