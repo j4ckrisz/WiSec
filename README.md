@@ -1,3 +1,5 @@
+## *Currently updating the project* 
+
 WiSec a WI-FI Penetration Testing tool that haves a lot of attacks for protocols like the **WPA2-PSK** and **WEP** encryption attacks.
 
 The tool has been tested in **Kali Linux**, **Parrot OS**.
