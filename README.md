@@ -4,7 +4,7 @@ The tool has been tested in **Kali Linux**, **Parrot OS**.
 
 - All of these attacks works great with the **Alfa AWUS036NHA** antena.
 
-![](/assets/images/WiSec.png)
+![](WiSec.png)
 
 
 ## Attacks
