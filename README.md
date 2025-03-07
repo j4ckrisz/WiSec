@@ -1,41 +1,41 @@
-## *Currently updating the project* 
+# Wisec 
 
-WiSec a WI-FI Penetration Testing tool that haves a lot of attacks for protocols like the **WPA2-PSK** and **WEP** encryption attacks.
-
-The tool has been tested in **Kali Linux**, **Parrot OS**.
-
-- All of these attacks works great with the **Alfa AWUS036NHA** antena.
+## Overview
+This tool automates various WiFi penetration testing tasks, making it easier to identify vulnerabilities in wireless networks.
 
 ![](WiSec.png)
 
+## Features
+- **Network Scanning**: Automatically detects nearby WiFi networks.
+- **Deauthentication Attacks**: Sends deauth packets to disconnect clients.
+- **Handshake Capture**: Captures WPA/WPA2 handshakes for password cracking.
+- **Evil Twin Attack**: Creates a fake access point to trick users.
+- **Automated Wordlist Attack**: Uses a dictionary to attempt password cracking.
+- and others...
 
-## Attacks
+## Requirements
+- Linux-based OS (Kali Linux recommended)
+- Aircrack-ng suite
+- Wireless network adapter with monitor mode support
 
-- Deauthentication Attack
-
-- Authentication Attack
-
-- Beacon Flood Attack
-
-- PMKID Attack
-
-- Passive Attack
-
-- Pixie Dust Attack
-
-- Null Pin Attack
-
-- WEP Protocol Attacks
-
-- Offline Cracking Options
-
-- Evil Twin Attacks
-
+## Installation
+```sh
+# Clone the repository
+git clone https://github.com/j4ckrisz/WiSec.git
+cd WiSec/
+```
 
 ## Usage
-
-> **To start WiSec**, you need to be **root** and then start it with this command.
-
+### Scan for WiFi Networks
 ```sh
-./WiSec -n wlan0 # Change the interface name if it's different
+sudo ./WiSec.sh -n <wireless-interface>
 ```
+
+## Legal Disclaimer
+This tool is intended for educational and authorized security testing purposes only. Unauthorized use is illegal.
+
+## Contribution
+Feel free to submit issues and pull requests to improve the tool.
+
+## License
+MIT License
