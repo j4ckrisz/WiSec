@@ -1,17 +1,24 @@
-# Wisec 
+# WiFi Pentesting Automation Tool
 
 ## Overview
-This tool automates various WiFi penetration testing tasks, making it easier to identify vulnerabilities in wireless networks.
+WiSec is an advanced WiFi penetration testing automation tool designed to simplify and enhance security assessments of wireless networks.
 
-![](WiSec.png)
+![WiSec Interface](WiSec.png)
 
 ## Features
-- **Network Scanning**: Automatically detects nearby WiFi networks.
-- **Deauthentication Attacks**: Sends deauth packets to disconnect clients.
 - **Handshake Capture**: Captures WPA/WPA2 handshakes for password cracking.
-- **Evil Twin Attack**: Creates a fake access point to trick users.
-- **Automated Wordlist Attack**: Uses a dictionary to attempt password cracking.
-- and others...
+- **Passive Handshake Capture**: Listens for handshake packets without active deauthentication.
+- **PMKID Attack**: Extracts PMKID from routers vulnerable to this attack.
+- **Offline Cracking**: Uses wordlists and cracking techniques to recover passwords.
+- **Constant Deauth Attack**: Jamming attack that disconnects clients.
+- **Beacon Flood Attack**: Generates fake APs to flood WiFi networks.
+- **WPS Brute-force & Null Pin Attack**: Attempts to brute-force WPS-enabled networks.
+- **Pixie Dust Attack**: Exploits WPS vulnerabilities to retrieve the key.
+- **Caffe Latte Attack**: Targets WEP-based networks.
+- **Authentication DoS**: Overwhelms networks with authentication requests.
+- **ChopChop Attack**: Decrypts WEP packets by analyzing packet fragments.
+- **MAC Changer**: Spoofs MAC address for anonymity.
+- **Evil Twin Attack**: Creates a fake AP to intercept credentials.
 
 ## Requirements
 - Linux-based OS (Kali Linux recommended)
@@ -21,12 +28,12 @@ This tool automates various WiFi penetration testing tasks, making it easier to 
 ## Installation
 ```sh
 # Clone the repository
-git clone https://github.com/j4ckrisz/WiSec.git
-cd WiSec/
+git clone https://github.com/j4ckrisz/wisec.git
+cd wisec
 ```
 
 ## Usage
-### Scan for WiFi Networks
+### Launch WiSec
 ```sh
 sudo ./WiSec.sh -n <wireless-interface>
 ```
